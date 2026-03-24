@@ -1,0 +1,103 @@
+# ========== Basic ==========
+task_id: "cifar10_alexnet_paper"
+
+
+
+
+# ========== Data ==========
+data:
+  root: "./datasets"
+  dataset: "cifar10"
+#  femnist cifar100
+  data_amount: 1
+# Non-IID setting (Dirichlet)
+  split_type: "dir"
+#niid for femnist      dir for  cifar datasets
+  alpha: 0.5
+
+  num_of_clients: 50
+#3597 clients for femnist
+  min_size: 10
+#每个客户端至少 10 条样本（防止空客户端）
+  train_test_split: 0.9
+
+# ========== Model ==========
+# 注意：这里假设你已经注册/实现了 AlexNet
+#model: "resnet18"
+#lenet, resnet, resnet18, resnet50,vgg9, and rnn
+test_mode: "test_in_server"
+#eans that server has a test set to run testing for the global model. Use this mode for cifar datasets.
+test_method: "average"
+#average：平均值计算方式
+#对所有客户端的测试结果计算简单平均值
+#各客户端权重相等
+#weighted：加权平均方式
+#根据客户端数据量或其他因素进行加权平均
+#数据量大的客户端对最终结果影响更大
+
+# ========== Server ==========
+server:
+  track: False
+
+  # # Communication rounds
+  rounds: 200
+  save_model_every: 100  # The frequency of saving model: save model every N round.
+  save_model_path: ""  # The path to save model. Default path is root directory of the library.
+  # Client sample ratio = 0.1 → 100 * 0.1 = 10
+  clients_per_round: 5
+  random_selection: True
+
+  test_every: 1
+  # The frequency of testing: conduct testing every N round. 默认值
+  test_all: False
+#  Whether test all clients or only selected clients.  默认值为true
+
+  # Server-side test batch size
+  batch_size: 64
+
+  aggregation_strategy: "FedAvg"
+  aggregation_content: "all"
+
+# ========== Client ==========
+client:
+  track: False
+
+  # # Local epochs
+  local_epoch: 5
+
+  # Batch size 实验设置
+  batch_size: 64
+  test_batch_size: 64
+
+  optimizer:
+    type: "SGD"
+    # Learning rate
+    lr: 0.1
+    # Momentum
+    momentum: 0.5
+    # Weight decay
+    weight_decay: 0.0001
+  seed: 42
+  local_test: False
+
+
+# ========== Learning Rate Decay ==========
+# 论文：CIFAR-10 无 LR decay
+# 所以这里不设置任何 scheduler
+
+# ========== Gradient Clipping ==========
+# 论文：Yes, norm = 2
+server_clip:
+  enable: True
+  norm: 2.0
+
+# ========== Tracking ==========
+tracking:
+  log_level: "INFO"
+  save_every: 10
+
+# ========== System Heterogeneity ==========
+resource_heterogeneous:
+  simulate: False
+
+seed: 42
