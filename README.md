@@ -1,5 +1,7 @@
 # FedGAC: Geometric Alignment Constraints for Mitigating Membership Inference in Federated Learning
 
+This article has been accepted by IJCNN 2026, and the original author's project link is https://github.com/yuy63434-tech/GAS-MR
+
 This repository provides the official implementation of **FedGAC**, a lightweight geometric alignment constraint for mitigating membership inference attacks in federated learning.
 
 FedGAC regularizes the geometry of generated representations using classifier-induced class-wise references, without modifying the federated learning protocol or local training procedure.
