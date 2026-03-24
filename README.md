@@ -1,5 +1,7 @@
 ## 📦 Installation
 
+This article has been accepted by IJCNN 2026, and the original author's project link is https://github.com/yuy63434-tech/GAS-MR
+
 1. Create the conda environment:
 
 ```bash
