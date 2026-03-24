@@ -1,0 +1,26 @@
+# Core Framework
+torch==1.13.1+cu117
+torchvision==0.14.1+cu117
+torchaudio==0.13.1+cu117
+tensorflow==2.11.1
+keras==2.11.0
+
+# Basic Data Science Packages
+numpy
+scipy
+pandas==1.5.3
+scikit-learn==1.2.1
+matplotlib
+opencv-python==4.7.0.72
+
+# Jupyter & Tools
+jupyter
+notebook
+ipykernel
+
+# Other Required Packages
+Pillow
+tqdm
+seaborn
+loguru==0.7.0
+wandb
